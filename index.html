@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kharcha Hogya — Paisa kahan gaya? Ab pata chalega. | AI Personal Finance India</title>
+<meta name="description" content="Kharcha Hogya — India's AI personal finance companion. Import bank statements (PDF/CSV/Excel), auto-categorise every rupee, self-transfers excluded, budgets & savings goals, and ask Kharcha AI. Local-first privacy + Cloudflare cloud backup.">
+<meta name="keywords" content="expense tracker India, personal finance app, AI finance assistant, budget planner, UPI spending tracker, bank statement parser, Kharcha Hogya, paisa kahan gaya">
+<link rel="canonical" href="https://kharchahogya.in/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kharcha Hogya">
+<meta property="og:url" content="https://kharchahogya.in/">
+<meta property="og:title" content="Kharcha Hogya — Paisa kahan gaya? Ab pata chalega.">
+<meta property="og:description" content="Import bank statements, track every rupee, plan budgets and ask your AI finance companion. Local-first, India-first.">
+<meta property="og:image" content="https://kharchahogya.in/logo-icon.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- ✅ FAVICON FIXED -->
+<link rel="icon" type="image/png" href="./logo-icon.png">
+<link rel="apple-touch-icon" href="./logo-icon.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Kharcha Hogya","applicationCategory":"FinanceApplication","operatingSystem":"Web","inLanguage":["en-IN","hi-IN"],"url":"https://kharchahogya.in/","description":"AI personal finance companion for India. Bank statement import, auto-categorisation, self-transfer exclusion, budgets, goals and conversational AI.","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"featureList":["Bank statement import (PDF/CSV/Excel)","Self-transfer aware totals","Budgets & savings goals","Kharcha AI chat","Monthly cash flow","Local-first privacy with cloud backup"]}
+</script>
+<style>
+:root{--p1:#0ea5e9;--p2:#2563eb;--p3:#38bdf8;--glow:rgba(14,165,233,.42);--soft:rgba(14,165,233,.13);
+--bg:#050814;--card:linear-gradient(180deg,rgba(20,27,48,.9),rgba(11,15,29,.95));--solid:#101628;--well:#070a14;
+--txt:#f8fafc;--muted:#94a3b8;--bdr:rgba(255,255,255,.08);
+--bevel:inset 0 1px 0 rgba(255,255,255,.16),0 20px 42px -15px rgba(0,0,0,.8);
+--sunken:inset 0 2px 6px rgba(0,0,0,.7),0 1px 0 rgba(255,255,255,.05);
+--f-ui:'Plus Jakarta Sans',sans-serif;--f-num:'Space Grotesk',sans-serif;--f-mono:'JetBrains Mono',monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--f-ui);background:var(--bg);color:var(--txt);overflow-x:hidden;
+background-image:radial-gradient(at 12% 0%,var(--soft) 0,transparent 50%),radial-gradient(at 92% 10%,rgba(37,99,235,.12) 0,transparent 45%)}
+.num{font-family:var(--f-num);letter-spacing:-.02em}.mono{font-family:var(--f-mono)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.orb{position:fixed;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0}
+.o1{width:480px;height:480px;background:radial-gradient(circle,#2563eb,transparent 70%);top:-140px;right:-100px;opacity:.35}
+.o2{width:400px;height:400px;background:radial-gradient(circle,#0ea5e9,transparent 70%);bottom:-120px;left:-120px;opacity:.25}
+/* NAV */
+nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(18px);background:rgba(5,8,20,.75);border-bottom:1px solid var(--bdr)}
+.nav-in{display:flex;align-items:center;gap:28px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;text-decoration:none;color:var(--txt)}
+.nav-links{display:flex;gap:22px;margin-left:12px}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:600;transition:.2s}
+.nav-links a:hover{color:var(--p3)}
+.btn-3d{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff;font-weight:700;font-size:14px;padding:11px 20px;border-radius:13px;border:none;cursor:pointer;text-decoration:none;
+box-shadow:0 10px 24px -6px var(--glow),inset 0 1.5px 0 rgba(255,255,255,.45),inset 0 -2px 0 rgba(0,0,0,.22);transition:.2s}
+.btn-3d:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.g-btn{display:inline-flex;align-items:center;gap:10px;background:#fff;color:#1f1f1f;font-weight:700;font-size:15px;padding:13px 22px;border-radius:14px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 12px 30px -8px rgba(255,255,255,.25),inset 0 1px 0 #fff;transition:.2s;font-family:var(--f-ui)}
+.g-btn:hover{transform:translateY(-2px);box-shadow:0 16px 36px -8px rgba(255,255,255,.35)}
+/* HERO */
+.hero{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding:84px 0 64px;animation:up .8s cubic-bezier(.2,.8,.3,1) both}
+@keyframes up{from{opacity:0;transform:translateY(28px)}to{opacity:1}}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:99px;background:var(--soft);border:1px solid rgba(14,165,233,.3);color:var(--p3);font-size:12.5px;font-weight:700}
+h1{font-size:clamp(40px,6vw,64px);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin:22px 0 18px}
+h1 .grad{background:linear-gradient(90deg,var(--p1),var(--p2),var(--p3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);font-size:17px;line-height:1.65;max-width:540px;margin-bottom:30px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.fine{font-size:12px;color:var(--muted);margin-top:14px}
+/* HERO PREVIEW CARD */
+.preview{position:relative}
+.holo{background:radial-gradient(circle at 88% 12%,rgba(255,255,255,.32),transparent 42%),linear-gradient(135deg,#0b1e4b 0%,var(--p2) 52%,var(--p1) 100%);border-radius:24px;padding:26px;color:#fff;box-shadow:0 30px 60px -14px var(--glow),inset 0 1.5px 0 rgba(255,255,255,.5);position:relative;overflow:hidden;animation:float 5s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px)}}
+.holo::after{content:'';position:absolute;top:-50%;left:-70%;width:45%;height:220%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transform:rotate(25deg);animation:shine 6s infinite}
+@keyframes shine{0%,35%{left:-70%}70%,100%{left:140%}}
+.holo .lbl{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;opacity:.8;text-transform:uppercase}
+.holo .big{font-family:var(--f-num);font-size:44px;font-weight:700;margin:6px 0 10px}
+.holo .chip{display:inline-block;background:rgba(16,185,129,.2);border:1px solid rgba(16,185,129,.4);color:#6ee7b7;font-size:12px;font-weight:700;padding:5px 11px;border-radius:99px}
+.mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
+.mini{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:13px;padding:10px 12px}
+.mini small{font-size:10px;opacity:.75;display:block;text-transform:uppercase;letter-spacing:.08em}
+.mini b{font-family:var(--f-num);font-size:16px}
+.ai-float{position:absolute;bottom:-16px;right:22px;display:flex;align-items:center;gap:8px;background:var(--solid);border:1px solid var(--bdr);color:var(--txt);font-size:12.5px;font-weight:700;padding:10px 16px;border-radius:99px;box-shadow:var(--bevel);animation:float 4s ease-in-out infinite reverse}
+/* TRUST STRIP */
+.trust{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:12px 26px;justify-content:center;padding:22px;border:1px solid var(--bdr);border-radius:18px;background:var(--card);box-shadow:var(--bevel);margin:10px 0 70px;font-size:13.5px;font-weight:600;color:var(--muted)}
+.trust span{display:flex;align-items:center;gap:8px}
+/* SECTIONS */
+section{position:relative;z-index:1;padding:40px 0}
+h2{font-size:clamp(28px,4vw,40px);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+.sec-sub{color:var(--muted);max-width:620px;line-height:1.6;margin-bottom:36px}
+.grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:20px;padding:24px;box-shadow:var(--bevel);transition:.25s}
+.card:hover{transform:translateY(-4px);border-color:rgba(14,165,233,.5)}
+.card .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--p1),var(--p2));box-shadow:0 8px 18px -4px var(--glow),inset 0 1.5px 0 rgba(255,255,255,.4);margin-bottom:16px}
+.card h3{font-size:16.5px;margin-bottom:8px}
+.card p{font-size:13.5px;color:var(--muted);line-height:1.6}
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.step{background:var(--card);border:1px solid var(--bdr);border-radius:20px;padding:26px;box-shadow:var(--bevel)}
+.step .n{font-family:var(--f-mono);font-size:13px;font-weight:700;color:var(--p3);background:var(--soft);width:34px;height:34px;border-radius:10px;display:grid;place-items:center;margin-bottom:14px}
+/* FINAL CTA */
+.final{margin:50px 0 80px;text-align:center;background:radial-gradient(circle at 50% 0%,var(--soft),transparent 60%),var(--card);border:1px solid var(--bdr);border-radius:28px;padding:60px 30px;box-shadow:var(--bevel)}
+/* FOOTER */
+footer{border-top:1px solid var(--bdr);padding:34px 0 50px;color:var(--muted);font-size:13px;position:relative;z-index:1}
+.foot-in{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+.foot-links{display:flex;gap:20px}
+.foot-links a{color:var(--muted);text-decoration:none;font-weight:600}
+.foot-links a:hover{color:var(--p3)}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding:56px 0 44px}.grid6,.steps{grid-template-columns:1fr 1fr}.nav-links{display:none}}
+@media(max-width:600px){.grid6,.steps{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="orb o1"></div><div class="orb o2"></div>
+
+<nav><div class="wrap nav-in">
+  <!-- ✅ LOGO FIXED -->
+  <a class="logo" href="./index.html">
+    <img src="./logo-icon.png" onerror="this.onerror=null;this.src='/logo-icon.png'" alt="Kharcha Hogya" style="width:40px;height:40px;border-radius:11px;object-fit:cover;box-shadow:0 8px 20px -4px var(--glow)">
+    Kharcha Hogya
+  </a>
+  <div class="nav-links">
+    <a href="#features">Features</a><a href="#how">How it works</a><a href="#privacy">Privacy</a>
+  </div>
+  <div style="margin-left:auto"><a id="navBtn" class="btn-3d" href="/auth/google">Sign in</a></div>
+</div></nav>
+
+<header class="wrap hero">
+  <div>
+    <span class="badge">✦ AI financial intelligence</span>
+    <!-- ✅ H1 LINE BREAK FIXED -->
+    <h1>Paisa kahan gaya?<br><span class="grad">Ab pata chalega.</span></h1>
+    <p class="sub">Import PDF, CSV or Excel bank statements — Kharcha Hogya auto-categorises every transaction, excludes transfers between your own accounts, tracks monthly spending and helps you plan budgets &amp; savings goals. Your data stays in your browser first; a secure backup lives on Cloudflare.</p>
+    <div class="cta-row">
+      <button id="googleBtn" class="g-btn" onclick="location.href='/auth/google'">
+        <svg width="19" height="19" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.5 6.1 29.5 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.7-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.5 6.1 29.5 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.7-.4-3.9z"/></svg>
+        <span id="gLabel">Continue with Google</span>
+      </button>
+      <a id="dashBtn" class="btn-3d" href="/app" style="display:none">Open dashboard →</a>
+    </div>
+    <p class="fine">Free for personal use · No card required · By continuing you agree to our Terms &amp; Privacy Promise</p>
+  </div>
+
+  <div class="preview">
+    <div class="holo">
+      <div class="lbl">● Net savings · Oct 2026</div>
+      <div class="big num">₹13,000</div>
+      <span class="chip">↗ 37% of ₹35,000 saved</span>
+      <div class="mini-stats">
+        <div class="mini"><small>Income</small><b class="num">₹35,000</b></div>
+        <div class="mini"><small>Expenses</small><b class="num">₹22,000</b></div>
+        <div class="mini"><small>Self-trf ⇄</small><b class="num">₹5,000</b></div>
+      </div>
+    </div>
+    <div class="ai-float">✦ Ask Kharcha AI</div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="trust">
+    <span>🔒 Local-first — data pehle aapke browser mein</span>
+    <span>☁️ Secure backup on Cloudflare</span>
+    <span>⇄ Own-account transfers excluded</span>
+    <span>₹ Paisa-level precision</span>
+    <span>🇮🇳 Made for India — UPI · INR · Indian banks</span>
+  </div>
+</div>
+
+<section class="wrap" id="features">
+  <h2>Personal finance tools to understand every rupee</h2>
+  <p class="sec-sub">Not just another expense tracker — a complete picture of where your money goes, in one intelligent dashboard.</p>
+  <div class="grid6">
+    <div class="card"><div class="ic"><i data-lucide="file-text" class="w-5 h-5"></i></div><h3>Bank statement imports</h3><p>Drop PhonePe, HDFC, SBI, ICICI PDFs or CSV/Excel exports. Transactions are parsed, categorised and deduplicated automatically.</p></div>
+    <div class="card"><div class="ic"><i data-lucide="arrow-left-right" class="w-5 h-5"></i></div><h3>Self-transfer aware</h3><p>Transfers between your own accounts are detected and excluded from income, spending and savings totals — no inflated numbers.</p></div>
+    <div class="card"><div class="ic"><i data-lucide="piggy-bank" class="w-5 h-5"></i></div><h3>Budgets &amp; savings goals</h3><p>Set category budgets, plan for upcoming bills, and track goals like Emergency Fund or your next gadget — month by month.</p></div>
+    <div class="card"><div class="ic"><i data-lucide="sparkles" class="w-5 h-5"></i></div><h3>Kharcha AI</h3><p>Ask questions in Hinglish or English — "iss mahine sabse zyada kahan gaya?" — and get answers grounded in your real transactions.</p></div>
+    <div class="card"><div class="ic"><i data-lucide="chart-line" class="w-5 h-5"></i></div><h3>Monthly cash flow</h3><p>Income vs expenses trends, spending breakdown, subscription detection and next-month forecasts with confidence ranges.</p></div>
+    <div class="card"><div class="ic"><i data-lucide="shield-check" class="w-5 h-5"></i></div><h3>Clear, accurate totals</h3><p>Paisa-level precision. Opening/closing balance rows excluded from imports. Calculations done by a deterministic engine — never guessed by AI.</p></div>
+  </div>
+</section>
+
+<section class="wrap" id="how">
+  <h2>3 steps. Zero jugaad.</h2>
+  <p class="sec-sub">No bank passwords, no account aggregation licence drama. Just your statements and your Google account.</p>
+  <div class="steps">
+    <div class="step"><div class="n">01</div><h3>Continue with Google</h3><p style="color:var(--muted);font-size:14px;line-height:1.6;margin-top:8px">One click OAuth sign-in. Your session is a signed cookie — we never see or store your Google password.</p></div>
+    <div class="step"><div class="n">02</div><h3>Import a statement</h3><p style="color:var(--muted);font-size:14px;line-height:1.6;margin-top:8px">Upload PDF/CSV/Excel or add kharcha manually. Data is stored locally in your browser and backed up to Cloudflare D1.</p></div>
+    <div class="step"><div class="n">03</div><h3>Understand &amp; improve</h3><p style="color:var(--muted);font-size:14px;line-height:1.6;margin-top:8px">Open the dashboard, watch budgets &amp; health score — and ask Kharcha AI anything about your money.</p></div>
+  </div>
+</section>
+
+<section class="wrap" id="privacy">
+  <div class="final">
+    <span class="badge">✦ Free forever for personal use</span>
+    <h2 style="margin-top:18px">Apna paisa samajhiye.<br><span class="grad">Aaj hi shuru karein.</span></h2>
+    <p class="sec-sub" style="margin:14px auto 30px;text-align:center">Local-first privacy. Cloud backup. AI that actually knows your numbers.</p>
+    <button class="g-btn" onclick="location.href='/auth/google'">
+      <svg width="19" height="19" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.5 6.1 29.5 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.7-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.5 6.1 29.5 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.7-.4-3.9z"/></svg>
+      Continue with Google
+    </button>
+  </div>
+</section>
+
+<footer><div class="wrap foot-in">
+  <div><b style="color:var(--txt)">₹ Kharcha Hogya</b> · kharchahogya.in · Made in India 🇮🇳</div>
+  <div class="foot-links"><a href="/privacy">Privacy Promise</a><a href="/terms">Terms</a><a href="mailto:hello@kharchahogya.in">Contact</a></div>
+  <div>© 2026 Kharcha Hogya</div>
+</div></footer>
+
+<script>
+lucide.createIcons();
+fetch('/api/me').then(r=>r.ok?r.json():null).then(u=>{
+  if(u){
+    document.getElementById('gLabel').textContent = 'Continue as ' + (u.name||u.email).split(' ')[0] + ' →';
+    document.getElementById('googleBtn').onclick = () => location.href='/app';
+    document.getElementById('navBtn').textContent = 'Dashboard';
+    document.getElementById('navBtn').href = '/app';
+    document.getElementById('dashBtn').style.display='inline-flex';
+  }
+}).catch(()=>{});
+</script>
+</body>
+</html>
