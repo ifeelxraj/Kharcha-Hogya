@@ -1,217 +1,367 @@
 <!DOCTYPE html>
-<html lang="en-IN">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kharcha Hogya — Paisa kahan gaya? Ab pata chalega. | AI Personal Finance India</title>
-<meta name="description" content="Kharcha Hogya — India's AI personal finance companion. Import bank statements (PDF/CSV/Excel), auto-categorise every rupee, self-transfers excluded, budgets & savings goals, and ask Kharcha AI. Local-first privacy + Cloudflare cloud backup.">
-<meta name="keywords" content="expense tracker India, personal finance app, AI finance assistant, budget planner, UPI spending tracker, bank statement parser, Kharcha Hogya, paisa kahan gaya">
-<link rel="canonical" href="https://kharchahogya.in/">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Kharcha Hogya">
-<meta property="og:url" content="https://kharchahogya.in/">
-<meta property="og:title" content="Kharcha Hogya — Paisa kahan gaya? Ab pata chalega.">
-<meta property="og:description" content="Import bank statements, track every rupee, plan budgets and ask your AI finance companion. Local-first, India-first.">
-<meta property="og:image" content="https://kharchahogya.in/logo-icon.png">
-<meta name="twitter:card" content="summary_large_image">
-
-<!-- ✅ FAVICON FIXED -->
-<link rel="icon" type="image/png" href="./logo-icon.png">
-<link rel="apple-touch-icon" href="./logo-icon.png">
-
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kharcha Hogya — Dashboard</title>
+<link rel="icon" type="image/png" href="../logo-icon.png">
+<link rel="apple-touch-icon" href="../logo-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Kharcha Hogya","applicationCategory":"FinanceApplication","operatingSystem":"Web","inLanguage":["en-IN","hi-IN"],"url":"https://kharchahogya.in/","description":"AI personal finance companion for India. Bank statement import, auto-categorisation, self-transfer exclusion, budgets, goals and conversational AI.","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"featureList":["Bank statement import (PDF/CSV/Excel)","Self-transfer aware totals","Budgets & savings goals","Kharcha AI chat","Monthly cash flow","Local-first privacy with cloud backup"]}
-</script>
 <style>
-:root{--p1:#0ea5e9;--p2:#2563eb;--p3:#38bdf8;--glow:rgba(14,165,233,.42);--soft:rgba(14,165,233,.13);
---bg:#050814;--card:linear-gradient(180deg,rgba(20,27,48,.9),rgba(11,15,29,.95));--solid:#101628;--well:#070a14;
---txt:#f8fafc;--muted:#94a3b8;--bdr:rgba(255,255,255,.08);
---bevel:inset 0 1px 0 rgba(255,255,255,.16),0 20px 42px -15px rgba(0,0,0,.8);
---sunken:inset 0 2px 6px rgba(0,0,0,.7),0 1px 0 rgba(255,255,255,.05);
---f-ui:'Plus Jakarta Sans',sans-serif;--f-num:'Space Grotesk',sans-serif;--f-mono:'JetBrains Mono',monospace}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:var(--f-ui);background:var(--bg);color:var(--txt);overflow-x:hidden;
-background-image:radial-gradient(at 12% 0%,var(--soft) 0,transparent 50%),radial-gradient(at 92% 10%,rgba(37,99,235,.12) 0,transparent 45%)}
-.num{font-family:var(--f-num);letter-spacing:-.02em}.mono{font-family:var(--f-mono)}
-.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
-.orb{position:fixed;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0}
-.o1{width:480px;height:480px;background:radial-gradient(circle,#2563eb,transparent 70%);top:-140px;right:-100px;opacity:.35}
-.o2{width:400px;height:400px;background:radial-gradient(circle,#0ea5e9,transparent 70%);bottom:-120px;left:-120px;opacity:.25}
-/* NAV */
-nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(18px);background:rgba(5,8,20,.75);border-bottom:1px solid var(--bdr)}
-.nav-in{display:flex;align-items:center;gap:28px;height:68px}
-.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;text-decoration:none;color:var(--txt)}
-.nav-links{display:flex;gap:22px;margin-left:12px}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:600;transition:.2s}
-.nav-links a:hover{color:var(--p3)}
-.btn-3d{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff;font-weight:700;font-size:14px;padding:11px 20px;border-radius:13px;border:none;cursor:pointer;text-decoration:none;
-box-shadow:0 10px 24px -6px var(--glow),inset 0 1.5px 0 rgba(255,255,255,.45),inset 0 -2px 0 rgba(0,0,0,.22);transition:.2s}
-.btn-3d:hover{filter:brightness(1.1);transform:translateY(-1px)}
-.g-btn{display:inline-flex;align-items:center;gap:10px;background:#fff;color:#1f1f1f;font-weight:700;font-size:15px;padding:13px 22px;border-radius:14px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 12px 30px -8px rgba(255,255,255,.25),inset 0 1px 0 #fff;transition:.2s;font-family:var(--f-ui)}
-.g-btn:hover{transform:translateY(-2px);box-shadow:0 16px 36px -8px rgba(255,255,255,.35)}
-/* HERO */
-.hero{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding:84px 0 64px;animation:up .8s cubic-bezier(.2,.8,.3,1) both}
-@keyframes up{from{opacity:0;transform:translateY(28px)}to{opacity:1}}
-.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:99px;background:var(--soft);border:1px solid rgba(14,165,233,.3);color:var(--p3);font-size:12.5px;font-weight:700}
-h1{font-size:clamp(40px,6vw,64px);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin:22px 0 18px}
-h1 .grad{background:linear-gradient(90deg,var(--p1),var(--p2),var(--p3));-webkit-background-clip:text;background-clip:text;color:transparent}
-.sub{color:var(--muted);font-size:17px;line-height:1.65;max-width:540px;margin-bottom:30px}
-.cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-.fine{font-size:12px;color:var(--muted);margin-top:14px}
-/* HERO PREVIEW CARD */
-.preview{position:relative}
-.holo{background:radial-gradient(circle at 88% 12%,rgba(255,255,255,.32),transparent 42%),linear-gradient(135deg,#0b1e4b 0%,var(--p2) 52%,var(--p1) 100%);border-radius:24px;padding:26px;color:#fff;box-shadow:0 30px 60px -14px var(--glow),inset 0 1.5px 0 rgba(255,255,255,.5);position:relative;overflow:hidden;animation:float 5s ease-in-out infinite}
-@keyframes float{50%{transform:translateY(-8px)}}
-.holo::after{content:'';position:absolute;top:-50%;left:-70%;width:45%;height:220%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transform:rotate(25deg);animation:shine 6s infinite}
-@keyframes shine{0%,35%{left:-70%}70%,100%{left:140%}}
-.holo .lbl{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;opacity:.8;text-transform:uppercase}
-.holo .big{font-family:var(--f-num);font-size:44px;font-weight:700;margin:6px 0 10px}
-.holo .chip{display:inline-block;background:rgba(16,185,129,.2);border:1px solid rgba(16,185,129,.4);color:#6ee7b7;font-size:12px;font-weight:700;padding:5px 11px;border-radius:99px}
-.mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
-.mini{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:13px;padding:10px 12px}
-.mini small{font-size:10px;opacity:.75;display:block;text-transform:uppercase;letter-spacing:.08em}
-.mini b{font-family:var(--f-num);font-size:16px}
-.ai-float{position:absolute;bottom:-16px;right:22px;display:flex;align-items:center;gap:8px;background:var(--solid);border:1px solid var(--bdr);color:var(--txt);font-size:12.5px;font-weight:700;padding:10px 16px;border-radius:99px;box-shadow:var(--bevel);animation:float 4s ease-in-out infinite reverse}
-/* TRUST STRIP */
-.trust{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:12px 26px;justify-content:center;padding:22px;border:1px solid var(--bdr);border-radius:18px;background:var(--card);box-shadow:var(--bevel);margin:10px 0 70px;font-size:13.5px;font-weight:600;color:var(--muted)}
-.trust span{display:flex;align-items:center;gap:8px}
-/* SECTIONS */
-section{position:relative;z-index:1;padding:40px 0}
-h2{font-size:clamp(28px,4vw,40px);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
-.sec-sub{color:var(--muted);max-width:620px;line-height:1.6;margin-bottom:36px}
-.grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.card{background:var(--card);border:1px solid var(--bdr);border-radius:20px;padding:24px;box-shadow:var(--bevel);transition:.25s}
-.card:hover{transform:translateY(-4px);border-color:rgba(14,165,233,.5)}
-.card .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--p1),var(--p2));box-shadow:0 8px 18px -4px var(--glow),inset 0 1.5px 0 rgba(255,255,255,.4);margin-bottom:16px}
-.card h3{font-size:16.5px;margin-bottom:8px}
-.card p{font-size:13.5px;color:var(--muted);line-height:1.6}
-/* STEPS */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.step{background:var(--card);border:1px solid var(--bdr);border-radius:20px;padding:26px;box-shadow:var(--bevel)}
-.step .n{font-family:var(--f-mono);font-size:13px;font-weight:700;color:var(--p3);background:var(--soft);width:34px;height:34px;border-radius:10px;display:grid;place-items:center;margin-bottom:14px}
-/* FINAL CTA */
-.final{margin:50px 0 80px;text-align:center;background:radial-gradient(circle at 50% 0%,var(--soft),transparent 60%),var(--card);border:1px solid var(--bdr);border-radius:28px;padding:60px 30px;box-shadow:var(--bevel)}
-/* FOOTER */
-footer{border-top:1px solid var(--bdr);padding:34px 0 50px;color:var(--muted);font-size:13px;position:relative;z-index:1}
-.foot-in{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
-.foot-links{display:flex;gap:20px}
-.foot-links a{color:var(--muted);text-decoration:none;font-weight:600}
-.foot-links a:hover{color:var(--p3)}
-@media(max-width:900px){.hero{grid-template-columns:1fr;padding:56px 0 44px}.grid6,.steps{grid-template-columns:1fr 1fr}.nav-links{display:none}}
-@media(max-width:600px){.grid6,.steps{grid-template-columns:1fr}}
+/* ============ SAPPHIRE PALETTE (FIXED) ============ */
+:root {
+  --f-ui:'Plus Jakarta Sans',sans-serif; --f-num:'Space Grotesk',sans-serif; --f-mono:'JetBrains Mono',monospace;
+  --p1:#0ea5e9; --p2:#2563eb; --p3:#38bdf8;
+  --glow:rgba(14,165,233,.42); --soft:rgba(14,165,233,.13); --tint:rgba(37,99,235,.08);
+}
+
+/* ============ DARK MODE (Obsidian Sapphire) ============ */
+[data-theme="dark"] {
+  --bg:#050814; --side:rgba(9,13,26,.86);
+  --card:linear-gradient(180deg,rgba(20,27,48,.92) 0%,rgba(11,15,29,.96) 100%);
+  --solid:#101628; --well:#070a14; --txt:#f8fafc; --muted:#94a3b8; --bdr:rgba(255,255,255,.08);
+  --bevel:inset 0 1px 0 rgba(255,255,255,.18), 0 20px 42px -15px rgba(0,0,0,.8);
+  --sunken:inset 0 2px 6px rgba(0,0,0,.75), 0 1px 0 rgba(255,255,255,.05); --spot:rgba(255,255,255,.08);
+}
+
+/* ============ LIGHT MODE — SOFT TINT FIX (NO HARSH WHITE!) ============ */
+[data-theme="light"] {
+  --bg:#edf2fa;
+  --side:rgba(252,253,255,.92);
+  --card:linear-gradient(180deg,#fcfdff 0%,#f3f6fc 100%);
+  --solid:#fdfdff; --well:#e6ecf7;
+  --txt:#1e293b;
+  --muted:#64748b; --bdr:rgba(15,23,42,.06);
+  --bevel:inset 0 1px 0 #ffffff, 0 12px 26px -14px rgba(15,23,42,.08);
+  --sunken:inset 0 2px 4px rgba(15,23,42,.05), 0 1px 0 #ffffff;
+  --spot:rgba(37,99,235,.05);
+}
+
+body {
+  font-family:var(--f-ui); background:var(--bg); color:var(--txt); transition:background .3s,color .3s;
+  background-image:radial-gradient(at 10% 0%,var(--tint) 0,transparent 52%),radial-gradient(at 92% 8%,var(--tint) 0,transparent 45%);
+}
+.num { font-family:var(--f-num); font-variant-numeric:tabular-nums; letter-spacing:-.02em; }
+.mono { font-family:var(--f-mono); }
+
+.card-3d { position:relative; background:var(--card); border:1px solid var(--bdr); border-radius:22px; box-shadow:var(--bevel); overflow:hidden; transition:border-color .25s,transform .2s; }
+.card-3d:hover { border-color:rgba(14,165,233,.55); }
+.card-3d::before { content:''; position:absolute; inset:0; pointer-events:none; background:radial-gradient(480px circle at var(--mx,-400px) var(--my,-400px),var(--spot),transparent 45%); }
+.card-3d::after { content:''; position:absolute; top:0; left:12%; right:12%; height:1px; background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent); pointer-events:none; }
+[data-theme="light"] .card-3d::after { background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent); }
+
+.well-3d { background:var(--well); box-shadow:var(--sunken); border-radius:13px; }
+.btn-3d { background:linear-gradient(135deg,var(--p1),var(--p2)); color:#fff; font-weight:700; border-radius:12px;
+  box-shadow:0 10px 24px -6px var(--glow),inset 0 1.5px 0 rgba(255,255,255,.45),inset 0 -2px 0 rgba(0,0,0,.22); transition:transform .15s,filter .2s; }
+.btn-3d:hover { filter:brightness(1.08); transform:translateY(-1px); }
+.jewel { width:42px; height:42px; border-radius:13px; display:grid; place-items:center; color:#fff;
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.45),inset 0 -2px 4px rgba(0,0,0,.28),0 8px 18px -4px rgba(0,0,0,.35); }
+.nav-btn { display:flex; align-items:center; gap:11px; width:100%; padding:11px 14px; border-radius:13px; font-weight:600; font-size:14px; color:var(--muted); transition:.2s; }
+.nav-btn:hover { color:var(--txt); background:var(--soft); }
+.nav-btn.active { color:#fff; background:linear-gradient(135deg,var(--p1),var(--p2)); box-shadow:0 8px 22px -6px var(--glow),inset 0 1px 0 rgba(255,255,255,.38); }
+
+.holo { background:radial-gradient(circle at 88% 14%,rgba(255,255,255,.35),transparent 42%),linear-gradient(135deg,#0b1e4b 0%,var(--p2) 52%,var(--p1) 100%);
+  box-shadow:0 24px 48px -12px var(--glow),inset 0 1.5px 0 rgba(255,255,255,.55); position:relative; overflow:hidden; }
+.holo::after { content:''; position:absolute; top:-50%; left:-70%; width:48%; height:220%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent); transform:rotate(25deg); animation:shine 5.5s infinite; }
+@keyframes shine { 0%,35%{left:-70%} 70%,100%{left:140%} }
+.fill-bar { height:100%; border-radius:99px; background:linear-gradient(90deg,var(--p1),var(--p2),var(--p3)); box-shadow:0 0 14px var(--glow); transition:width .7s cubic-bezier(.22,1,.36,1); }
+.cat-pill { transition:.2s; cursor:pointer; border:1px solid transparent; }
+.cat-pill:hover, .cat-pill.active { border-color:var(--p1); background:var(--soft); transform:translateX(3px); }
+.tab-pane { display:none; } .tab-pane.active { display:block; }
 </style>
 </head>
-<body>
-<div class="orb o1"></div><div class="orb o2"></div>
+<body class="min-h-screen flex">
 
-<nav><div class="wrap nav-in">
-  <!-- ✅ LOGO FIXED -->
-  <a class="logo" href="./index.html">
-    <img src="./logo-icon.png" onerror="this.onerror=null;this.src='/logo-icon.png'" alt="Kharcha Hogya" style="width:40px;height:40px;border-radius:11px;object-fit:cover;box-shadow:0 8px 20px -4px var(--glow)">
-    Kharcha Hogya
+<!-- SIDEBAR -->
+<aside class="w-64 shrink-0 hidden lg:flex flex-col p-4 sticky top-0 h-screen border-r" style="background:var(--side);border-color:var(--bdr);backdrop-filter:blur(22px)">
+  <a href="../index.html" class="flex items-center gap-3 px-2 pb-6 no-underline" style="color:var(--txt)">
+    <img src="../logo-icon.png" onerror="this.onerror=null;this.src='/logo-icon.png'" alt="Kharcha Hogya" class="w-11 h-11 rounded-xl object-cover shrink-0" style="box-shadow:0 8px 22px -4px var(--glow)">
+    <div><b class="text-lg tracking-tight block leading-tight">Kharcha Hogya</b><span class="text-xs" style="color:var(--muted)">Paisa kahan gaya?</span></div>
   </a>
-  <div class="nav-links">
-    <a href="#features">Features</a><a href="#how">How it works</a><a href="#privacy">Privacy</a>
+  <div class="space-y-1">
+    <button class="nav-btn active" data-tab="home"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Overview</button>
+    <button class="nav-btn" data-tab="ledger"><i data-lucide="arrow-left-right" class="w-4 h-4"></i> Activity Ledger</button>
+    <button class="nav-btn" data-tab="goals"><i data-lucide="target" class="w-4 h-4"></i> Budgets & Goals</button>
+    <button class="nav-btn" data-tab="insights"><i data-lucide="sparkles" class="w-4 h-4"></i> Smart Insights</button>
   </div>
-  <div style="margin-left:auto"><a id="navBtn" class="btn-3d" href="/auth/google">Sign in</a></div>
-</div></nav>
-
-<header class="wrap hero">
-  <div>
-    <span class="badge">✦ AI financial intelligence</span>
-    <!-- ✅ H1 LINE BREAK FIXED -->
-    <h1>Paisa kahan gaya?<br><span class="grad">Ab pata chalega.</span></h1>
-    <p class="sub">Import PDF, CSV or Excel bank statements — Kharcha Hogya auto-categorises every transaction, excludes transfers between your own accounts, tracks monthly spending and helps you plan budgets &amp; savings goals. Your data stays in your browser first; a secure backup lives on Cloudflare.</p>
-    <div class="cta-row">
-      <button id="googleBtn" class="g-btn" onclick="location.href='/auth/google'">
-        <svg width="19" height="19" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.5 6.1 29.5 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.7-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.5 6.1 29.5 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.7-.4-3.9z"/></svg>
-        <span id="gLabel">Continue with Google</span>
-      </button>
-      <a id="dashBtn" class="btn-3d" href="/app" style="display:none">Open dashboard →</a>
+  <div class="mt-auto space-y-3">
+    <div class="well-3d p-3 text-xs" style="color:var(--muted)">
+      <div class="font-bold mb-1 text-emerald-400">● Private Workspace</div>
+      Self-transfers auto-excluded from spending.
     </div>
-    <p class="fine">Free for personal use · No card required · By continuing you agree to our Terms &amp; Privacy Promise</p>
+    <button id="openModal" class="btn-3d w-full py-3 text-sm flex items-center justify-center gap-2"><i data-lucide="plus" class="w-4 h-4"></i> Quick Add Kharcha</button>
   </div>
+</aside>
 
-  <div class="preview">
-    <div class="holo">
-      <div class="lbl">● Net savings · Oct 2026</div>
-      <div class="big num">₹13,000</div>
-      <span class="chip">↗ 37% of ₹35,000 saved</span>
-      <div class="mini-stats">
-        <div class="mini"><small>Income</small><b class="num">₹35,000</b></div>
-        <div class="mini"><small>Expenses</small><b class="num">₹22,000</b></div>
-        <div class="mini"><small>Self-trf ⇄</small><b class="num">₹5,000</b></div>
+<!-- MAIN -->
+<main class="flex-1 p-5 md:p-7 max-w-[1400px] mx-auto w-full pb-28">
+  <header class="flex flex-wrap items-center gap-3 mb-6">
+    <div id="monthTabs" class="well-3d p-1 flex gap-1"></div>
+    <select class="well-3d px-3.5 py-2 text-xs font-semibold outline-none cursor-pointer" style="color:var(--txt)">
+      <option>All Accounts (Merged)</option><option>HDFC ••4821</option><option>SBI ••9012</option><option>PhonePe UPI</option>
+    </select>
+    <div class="ml-auto flex items-center gap-2">
+      <button id="themeBtn" class="card-3d px-3.5 py-2 text-xs font-bold flex items-center gap-2 !rounded-xl">
+        <span id="tIcon">☀️</span> <span id="tText">Light</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- TAB 1: HOME -->
+  <section id="tab-home" class="tab-pane active space-y-5">
+    <div class="card-3d p-7 md:p-8 grid md:grid-cols-12 gap-6 items-center">
+      <div class="md:col-span-7">
+        <span class="mono text-xs font-bold uppercase tracking-widest" style="color:var(--p1)">● Net Savings · <span id="mTitle">Oct 2026</span></span>
+        <h1 id="heroSav" class="num text-5xl md:text-6xl font-bold my-3">₹13,000</h1>
+        <div class="flex flex-wrap gap-2 mb-5">
+          <span id="rateChip" class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25">↗ 37% of ₹35,000 saved</span>
+          <span class="well-3d px-3 py-1 !rounded-full text-xs font-semibold" style="color:var(--muted)">Target: 30%</span>
+        </div>
+        <div class="max-w-md">
+          <div class="flex justify-between text-xs font-semibold mb-1.5" style="color:var(--muted)"><span>Savings Rate Progress</span><span id="rateTxt" class="mono">37%</span></div>
+          <div class="well-3d h-3 p-0.5 !rounded-full"><div id="rateBar" class="fill-bar" style="width:37%"></div></div>
+        </div>
+      </div>
+      <div class="md:col-span-5 flex justify-center">
+        <div class="holo w-full max-w-xs h-44 rounded-2xl p-5 text-white flex flex-col justify-between">
+          <div class="flex justify-between items-center"><div class="w-9 h-6 rounded-md bg-gradient-to-br from-amber-200 to-amber-500 shadow"></div><span class="mono text-[11px] opacity-85">KHARCHA PASS · 3D</span></div>
+          <div><div class="text-[11px] uppercase tracking-wider opacity-75">Safe-to-Spend Balance</div><div id="safeBal" class="num text-2xl font-bold">₹18,300</div></div>
+          <div class="flex justify-between mono text-[11px] opacity-85"><span>72 TXNS VERIFIED</span><span>SELF-TRF ISOLATED</span></div>
+        </div>
       </div>
     </div>
-    <div class="ai-float">✦ Ask Kharcha AI</div>
-  </div>
-</header>
 
-<div class="wrap">
-  <div class="trust">
-    <span>🔒 Local-first — data pehle aapke browser mein</span>
-    <span>☁️ Secure backup on Cloudflare</span>
-    <span>⇄ Own-account transfers excluded</span>
-    <span>₹ Paisa-level precision</span>
-    <span>🇮🇳 Made for India — UPI · INR · Indian banks</span>
+    <div id="kpiGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+
+    <div class="grid lg:grid-cols-12 gap-5">
+      <div class="card-3d p-6 lg:col-span-7">
+        <div class="flex flex-wrap justify-between items-center gap-2 mb-2">
+          <div><h3 class="font-bold text-base">Cashflow Trajectory</h3><span class="text-xs" style="color:var(--muted)">Click any month point to inspect it</span></div>
+          <div class="well-3d p-1 flex gap-1 text-[11px] font-bold">
+            <button id="modeSpline" class="btn-3d px-2.5 py-1 !rounded-lg">Spline Glow</button>
+            <button id="modeBar" class="px-2.5 py-1 rounded-lg opacity-75">3D Bars</button>
+          </div>
+        </div>
+        <div id="eCashflow" style="height:290px;width:100%"></div>
+      </div>
+
+      <div class="card-3d p-6 lg:col-span-5">
+        <div class="flex justify-between items-center mb-1">
+          <div><h3 class="font-bold text-base">Where Money Went</h3><span class="text-xs" style="color:var(--muted)">Hover slice or category</span></div>
+          <div class="well-3d p-1 flex gap-1 text-[11px] font-bold">
+            <button id="modeDonut" class="btn-3d px-2.5 py-1 !rounded-lg">3D Ring</button>
+            <button id="modeRose" class="px-2.5 py-1 rounded-lg opacity-75">Rose Petal</button>
+          </div>
+        </div>
+        <div class="relative flex items-center justify-center" style="height:220px">
+          <div id="eDonut" class="w-full h-full"></div>
+          <div class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+            <span id="dLabel" class="mono text-[10px] uppercase tracking-widest" style="color:var(--muted)">Total Spent</span>
+            <b id="dVal" class="num text-2xl font-bold mt-0.5">₹22,000</b>
+            <span id="dPct" class="text-[11px] font-bold px-2 py-0.5 rounded-full mt-1" style="background:var(--soft);color:var(--p1)">100%</span>
+          </div>
+        </div>
+        <div id="catList" class="grid grid-cols-2 gap-2 mt-2"></div>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-12 gap-5">
+      <div class="card-3d p-6 lg:col-span-5 grid sm:grid-cols-2 items-center gap-4">
+        <div id="eGauge" style="height:190px;width:100%"></div>
+        <div class="space-y-3 text-xs">
+          <div class="font-bold text-sm mb-1">Explainable Health</div>
+          <div><div class="flex justify-between mb-1"><span style="color:var(--muted)">Savings Score</span><b class="mono">92/100</b></div><div class="well-3d h-2 p-0.5"><div class="fill-bar" style="width:92%"></div></div></div>
+          <div><div class="flex justify-between mb-1"><span style="color:var(--muted)">Budget Discipline</span><b class="mono">84/100</b></div><div class="well-3d h-2 p-0.5"><div class="fill-bar" style="width:84%"></div></div></div>
+          <div><div class="flex justify-between mb-1"><span style="color:var(--muted)">Subscription Load</span><b class="mono">78/100</b></div><div class="well-3d h-2 p-0.5"><div class="fill-bar" style="width:78%"></div></div></div>
+        </div>
+      </div>
+      <div class="card-3d p-6 lg:col-span-7">
+        <div class="flex justify-between items-center mb-3"><h3 class="font-bold text-base">Upcoming Commitments</h3><span class="mono text-xs font-bold text-amber-400">Due · ₹27,398</span></div>
+        <div id="billBox" class="grid sm:grid-cols-3 gap-3 text-xs"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 2: LEDGER -->
+  <section id="tab-ledger" class="tab-pane space-y-4">
+    <div onclick="alert('Drop PhonePe / HDFC / SBI PDF, CSV or Excel statement to auto-parse & exclude self-transfers!')" class="card-3d p-8 text-center cursor-pointer border-dashed border-2">
+      <b class="text-base block mb-1">📄 Drop Bank or UPI Statement (PDF · CSV · XLSX)</b>
+      <span class="text-xs" style="color:var(--muted)">Opening/closing balances ignored · Self-transfers tagged automatically</span>
+    </div>
+    <div class="card-3d p-6"><h3 class="font-bold mb-4">Verified Ledger</h3><div id="txBox" class="space-y-2"></div></div>
+  </section>
+
+  <!-- TAB 3: GOALS -->
+  <section id="tab-goals" class="tab-pane grid md:grid-cols-2 gap-4">
+    <div class="card-3d p-6 space-y-4"><h3 class="font-bold">Monthly Budgets</h3>
+      <div><div class="flex justify-between text-xs font-semibold mb-1"><span>Food & Dining</span><span class="mono">₹5,200 / ₹7,000</span></div><div class="well-3d h-2.5 p-0.5"><div class="fill-bar" style="width:74%"></div></div></div>
+      <div><div class="flex justify-between text-xs font-semibold mb-1"><span>Shopping</span><span class="mono">₹3,100 / ₹5,000</span></div><div class="well-3d h-2.5 p-0.5"><div class="fill-bar" style="width:62%"></div></div></div>
+      <div><div class="flex justify-between text-xs font-semibold mb-1"><span>Transport & Fuel</span><span class="mono">₹2,400 / ₹5,000</span></div><div class="well-3d h-2.5 p-0.5"><div class="fill-bar" style="width:48%"></div></div></div>
+    </div>
+    <div class="card-3d p-6 space-y-4"><h3 class="font-bold">Savings Goals</h3>
+      <div><div class="flex justify-between text-xs font-semibold mb-1"><span>Emergency Fund (3M)</span><span class="mono">₹45,000 / ₹90,000</span></div><div class="well-3d h-2.5 p-0.5"><div class="fill-bar" style="width:50%"></div></div></div>
+      <div><div class="flex justify-between text-xs font-semibold mb-1"><span>MacBook Upgrade</span><span class="mono">₹28,000 / ₹80,000</span></div><div class="well-3d h-2.5 p-0.5"><div class="fill-bar" style="width:35%"></div></div></div>
+    </div>
+  </section>
+
+  <!-- TAB 4: INSIGHTS -->
+  <section id="tab-insights" class="tab-pane grid md:grid-cols-3 gap-4">
+    <div class="card-3d p-6"><span class="mono text-xs text-rose-400">SPENDING LEAK</span><h3 class="font-bold text-lg my-2">Late-Night Food +18%</h3><p class="text-xs leading-relaxed" style="color:var(--muted)">Weekend Swiggy/Zomato orders after 10 PM jumped vs Sept. Capping saves ~₹1,400/mo.</p></div>
+    <div class="card-3d p-6"><span class="mono text-xs text-amber-400">SUBSCRIPTIONS</span><h3 class="font-bold text-lg my-2 num">₹25,776 / year</h3><p class="text-xs leading-relaxed" style="color:var(--muted)">Netflix (₹649) + Cult.fit (₹1,499) synced with Upcoming Commitments.</p></div>
+    <div class="card-3d p-6"><span class="mono text-xs text-emerald-400">NOV FORECAST</span><h3 class="font-bold text-lg my-2 num">₹21,400 ± ₹2.2k</h3><p class="text-xs leading-relaxed" style="color:var(--muted)">Deterministic 3-month rolling average (±1 SD). Clearly labelled prediction.</p></div>
+  </section>
+</main>
+
+<!-- AI FAB + CHAT -->
+<button id="aiBtn" class="btn-3d fixed bottom-5 right-5 z-50 px-5 py-3.5 !rounded-full flex items-center gap-2 text-sm">✦ Ask Kharcha AI</button>
+<div id="aiBox" class="hidden fixed bottom-20 right-5 z-50 w-96 max-w-[92vw] card-3d !rounded-3xl flex-col overflow-hidden" style="background:var(--solid)">
+  <div class="p-4 border-b flex justify-between items-center" style="border-color:var(--bdr)"><div><b class="text-sm">✦ Kharcha AI</b><span class="block text-[11px]" style="color:var(--muted)">Grounded in your verified ledger</span></div><button id="closeAi" class="text-xs px-2 py-1 well-3d">✕</button></div>
+  <div id="aiMsgs" class="p-4 h-64 overflow-y-auto space-y-2.5 text-xs"><div class="well-3d p-3 rounded-xl">Hi Rajat! Puchiye — is mahine paisa kahan gaya?</div></div>
+  <div class="px-3 pb-2 flex gap-1.5 overflow-x-auto text-[11px]">
+    <button class="qChip well-3d px-2.5 py-1 whitespace-nowrap">Paisa kahan gaya?</button>
+    <button class="qChip well-3d px-2.5 py-1 whitespace-nowrap">Can I afford ₹10,000?</button>
+    <button class="qChip well-3d px-2.5 py-1 whitespace-nowrap">Self transfers?</button>
   </div>
+  <form id="aiForm" class="p-3 border-t flex gap-2" style="border-color:var(--bdr)"><input id="aiInp" placeholder="Ask about your money..." class="well-3d flex-1 px-3 py-2 text-xs outline-none"><button class="btn-3d px-4 py-2 text-xs !rounded-xl">Send</button></form>
 </div>
 
-<section class="wrap" id="features">
-  <h2>Personal finance tools to understand every rupee</h2>
-  <p class="sec-sub">Not just another expense tracker — a complete picture of where your money goes, in one intelligent dashboard.</p>
-  <div class="grid6">
-    <div class="card"><div class="ic"><i data-lucide="file-text" class="w-5 h-5"></i></div><h3>Bank statement imports</h3><p>Drop PhonePe, HDFC, SBI, ICICI PDFs or CSV/Excel exports. Transactions are parsed, categorised and deduplicated automatically.</p></div>
-    <div class="card"><div class="ic"><i data-lucide="arrow-left-right" class="w-5 h-5"></i></div><h3>Self-transfer aware</h3><p>Transfers between your own accounts are detected and excluded from income, spending and savings totals — no inflated numbers.</p></div>
-    <div class="card"><div class="ic"><i data-lucide="piggy-bank" class="w-5 h-5"></i></div><h3>Budgets &amp; savings goals</h3><p>Set category budgets, plan for upcoming bills, and track goals like Emergency Fund or your next gadget — month by month.</p></div>
-    <div class="card"><div class="ic"><i data-lucide="sparkles" class="w-5 h-5"></i></div><h3>Kharcha AI</h3><p>Ask questions in Hinglish or English — "iss mahine sabse zyada kahan gaya?" — and get answers grounded in your real transactions.</p></div>
-    <div class="card"><div class="ic"><i data-lucide="chart-line" class="w-5 h-5"></i></div><h3>Monthly cash flow</h3><p>Income vs expenses trends, spending breakdown, subscription detection and next-month forecasts with confidence ranges.</p></div>
-    <div class="card"><div class="ic"><i data-lucide="shield-check" class="w-5 h-5"></i></div><h3>Clear, accurate totals</h3><p>Paisa-level precision. Opening/closing balance rows excluded from imports. Calculations done by a deterministic engine — never guessed by AI.</p></div>
-  </div>
-</section>
-
-<section class="wrap" id="how">
-  <h2>3 steps. Zero jugaad.</h2>
-  <p class="sec-sub">No bank passwords, no account aggregation licence drama. Just your statements and your Google account.</p>
-  <div class="steps">
-    <div class="step"><div class="n">01</div><h3>Continue with Google</h3><p style="color:var(--muted);font-size:14px;line-height:1.6;margin-top:8px">One click OAuth sign-in. Your session is a signed cookie — we never see or store your Google password.</p></div>
-    <div class="step"><div class="n">02</div><h3>Import a statement</h3><p style="color:var(--muted);font-size:14px;line-height:1.6;margin-top:8px">Upload PDF/CSV/Excel or add kharcha manually. Data is stored locally in your browser and backed up to Cloudflare D1.</p></div>
-    <div class="step"><div class="n">03</div><h3>Understand &amp; improve</h3><p style="color:var(--muted);font-size:14px;line-height:1.6;margin-top:8px">Open the dashboard, watch budgets &amp; health score — and ask Kharcha AI anything about your money.</p></div>
-  </div>
-</section>
-
-<section class="wrap" id="privacy">
-  <div class="final">
-    <span class="badge">✦ Free forever for personal use</span>
-    <h2 style="margin-top:18px">Apna paisa samajhiye.<br><span class="grad">Aaj hi shuru karein.</span></h2>
-    <p class="sec-sub" style="margin:14px auto 30px;text-align:center">Local-first privacy. Cloud backup. AI that actually knows your numbers.</p>
-    <button class="g-btn" onclick="location.href='/auth/google'">
-      <svg width="19" height="19" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.5 6.1 29.5 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.7-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.5 6.1 29.5 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.7-.4-3.9z"/></svg>
-      Continue with Google
-    </button>
-  </div>
-</section>
-
-<footer><div class="wrap foot-in">
-  <div><b style="color:var(--txt)">₹ Kharcha Hogya</b> · kharchahogya.in · Made in India 🇮🇳</div>
-  <div class="foot-links"><a href="/privacy">Privacy Promise</a><a href="/terms">Terms</a><a href="mailto:hello@kharchahogya.in">Contact</a></div>
-  <div>© 2026 Kharcha Hogya</div>
-</div></footer>
+<!-- QUICK ADD MODAL -->
+<div id="modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm place-items-center p-4">
+  <form id="addForm" class="card-3d p-6 w-full max-w-sm space-y-3" style="background:var(--solid)">
+    <div class="flex justify-between items-center"><b class="text-base">Add Transaction</b><button type="button" id="closeModal" class="well-3d px-2 py-1 text-xs">✕</button></div>
+    <select id="fType" class="well-3d w-full p-2.5 text-xs outline-none"><option value="out">Expense (Kharcha)</option><option value="in">Income (Kamai)</option><option value="self">Self Transfer (Excluded)</option></select>
+    <input id="fTitle" required placeholder="Merchant / Note (e.g. Swiggy)" class="well-3d w-full p-2.5 text-xs outline-none">
+    <input id="fAmt" type="number" min="1" required placeholder="Amount in ₹" class="well-3d w-full p-2.5 text-xs outline-none">
+    <button class="btn-3d w-full py-2.5 text-xs">Save Entry</button>
+  </form>
+</div>
 
 <script>
-lucide.createIcons();
-fetch('/api/me').then(r=>r.ok?r.json():null).then(u=>{
-  if(u){
-    document.getElementById('gLabel').textContent = 'Continue as ' + (u.name||u.email).split(' ')[0] + ' →';
-    document.getElementById('googleBtn').onclick = () => location.href='/app';
-    document.getElementById('navBtn').textContent = 'Dashboard';
-    document.getElementById('navBtn').href = '/app';
-    document.getElementById('dashBtn').style.display='inline-flex';
-  }
-}).catch(()=>{});
+const DB = { May:{inc:28000,exp:21000,trf:2000}, Jun:{inc:30000,exp:22500,trf:3500}, Jul:{inc:32000,exp:24800,trf:0}, Aug:{inc:35000,exp:23400,trf:4000}, Sept:{inc:34500,exp:25100,trf:2500}, Oct:{inc:35000,exp:22000,trf:5000} };
+const CATS = [ {name:'House Rent',val:8000}, {name:'Food & Dining',val:5200}, {name:'Bills & Subs',val:3300}, {name:'Shopping',val:3100}, {name:'Transport',val:2400} ];
+const COLS = ['#38bdf8','#2563eb','#6366f1','#14b8a6','#f59e0b'];
+const TX = [ {t:'Salary Credit · HDFC',a:35000,k:'in'}, {t:'SBI → HDFC Own Transfer',a:5000,k:'self'}, {t:'House Rent UPI',a:8000,k:'out'}, {t:'Swiggy & Zomato',a:5200,k:'out'} ];
+const BILLS = [ {n:'House Rent',d:'Overdue · 5 Nov',a:22000,late:1}, {n:'Electricity + WiFi',d:'Due 18 Nov',a:3250,late:0}, {n:'Netflix + Cult.fit',d:'Auto-recurring',a:2148,late:0} ];
+
+let cur='Oct', cashType='line', roseMode=false, ec1, ec2, ec3;
+const fmt = n => '₹' + Math.round(n).toLocaleString('en-IN');
+
+document.addEventListener('mousemove', e => document.querySelectorAll('.card-3d').forEach(c => {
+  const r = c.getBoundingClientRect(); c.style.setProperty('--mx',(e.clientX-r.left)+'px'); c.style.setProperty('--my',(e.clientY-r.top)+'px');
+}));
+
+function renderUI(m) {
+  cur = m; const d = DB[m], sav = d.inc - d.exp, rate = Math.round((sav/d.inc)*100);
+  mTitle.textContent = m + ' 2026'; heroSav.textContent = fmt(sav);
+  rateChip.textContent = `↗ ${rate}% of ${fmt(d.inc)} saved`; rateTxt.textContent = rate + '%';
+  rateBar.style.width = Math.min(100,Math.max(0,rate)) + '%'; safeBal.textContent = fmt(sav + 5300);
+  const kpis = [
+    {l:'Total Income',v:d.inc,b:'+12% MoM',g:'from-emerald-400 to-emerald-600',i:'arrow-down-left'},
+    {l:'Total Expenses',v:d.exp,b:'On Track',g:'from-rose-400 to-rose-600',i:'arrow-up-right'},
+    {l:'Net Savings',v:sav,b:'Net Cash',g:'from-cyan-400 to-blue-600',i:'wallet'},
+    {l:'Self Transfers',v:d.trf,b:'Excluded',g:'from-amber-400 to-orange-500',i:'repeat'}
+  ];
+  kpiGrid.innerHTML = kpis.map(k=>`<div class="card-3d p-5"><div class="flex justify-between mb-3"><div class="jewel bg-gradient-to-br ${k.g}"><i data-lucide="${k.i}" class="w-5 h-5"></i></div><span class="well-3d px-2.5 py-1 text-[11px] mono">${k.b}</span></div><div class="text-xs font-semibold" style="color:var(--muted)">${k.l}</div><div class="num text-2xl font-bold mt-1">${fmt(k.v)}</div></div>`).join('');
+  txBox.innerHTML = TX.map(x=>`<div class="well-3d p-3 flex justify-between items-center text-xs"><b>${x.t}</b><span class="num font-bold ${x.k==='in'?'text-emerald-400':x.k==='self'?'text-amber-400':''}">${x.k==='in'?'+':x.k==='self'?'⇄ ':'−'}${fmt(x.a)}</span></div>`).join('');
+  lucide.createIcons(); drawCharts();
+}
+
+billBox.innerHTML = BILLS.map(b=>`<div class="well-3d p-3.5 flex flex-col justify-between gap-3"><div><b class="text-sm block">${b.n}</b><span class="${b.late?'text-rose-400 font-semibold':''}" style="${b.late?'':'color:var(--muted)'}">${b.d}</span></div><div class="flex justify-between items-center"><b class="num text-base">${fmt(b.a)}</b><button onclick="this.textContent=this.textContent==='PAID ✓'?'MARK PAID':'PAID ✓';this.classList.toggle('btn-3d')" class="px-2.5 py-1 rounded-lg border text-[10px] mono font-bold" style="border-color:var(--bdr)">MARK PAID</button></div></div>`).join('');
+
+function drawCharts() {
+  if (!window.echarts) return;
+  const dark = document.documentElement.dataset.theme === 'dark';
+  const tick = dark ? '#94a3b8' : '#64748b', split = dark ? 'rgba(255,255,255,0.06)' : 'rgba(15,23,42,0.07)';
+  if (!ec1) { ec1 = echarts.init(eCashflow); ec2 = echarts.init(eDonut); ec3 = echarts.init(eGauge); }
+
+  ec1.setOption({
+    tooltip:{trigger:'axis',backgroundColor:dark?'#0f172a':'#ffffff',borderColor:'#2563eb',textStyle:{color:dark?'#f8fafc':'#0f172a',fontFamily:'Plus Jakarta Sans'}},
+    legend:{top:0,right:0,textStyle:{color:tick},icon:'circle'},
+    grid:{left:48,right:16,top:38,bottom:26},
+    xAxis:{type:'category',data:Object.keys(DB),axisLine:{show:false},axisTick:{show:false},axisLabel:{color:tick,fontWeight:600}},
+    yAxis:{type:'value',splitLine:{lineStyle:{color:split,type:'dashed'}},axisLabel:{color:tick,formatter:v=>'₹'+(v/1000)+'k'}},
+    series:[
+      {name:'Income',type:cashType,smooth:true,symbolSize:9,itemStyle:{color:COLS[0],borderRadius:[6,6,0,0]},lineStyle:{width:3.5,shadowBlur:14,shadowColor:COLS[0]},
+        areaStyle:cashType==='line'?{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#38bdf866'},{offset:1,color:'#38bdf800'}])}:null,data:Object.values(DB).map(x=>x.inc)},
+      {name:'Expenses',type:cashType,smooth:true,symbolSize:9,itemStyle:{color:'#f43f5e',borderRadius:[6,6,0,0]},lineStyle:{width:3.5,shadowBlur:14,shadowColor:'#f43f5e'},
+        areaStyle:cashType==='line'?{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#f43f5e55'},{offset:1,color:'#f43f5e00'}])}:null,data:Object.values(DB).map(x=>x.exp)}
+    ]
+  }, true);
+  ec1.off('click'); ec1.on('click', p => setActiveMonth(p.name));
+
+  const tot = CATS.reduce((s,c)=>s+c.val,0);
+  dLabel.textContent='Total Spent'; dVal.textContent=fmt(tot); dPct.textContent=cur+' · 100%';
+  ec2.setOption({ tooltip:{show:false}, series:[{ type:'pie', radius: roseMode?['44%','88%']:['62%','86%'], roseType: roseMode?'radius':false,
+    padAngle:3, itemStyle:{borderRadius:10, shadowBlur:16, shadowColor:'rgba(0,0,0,0.35)'}, label:{show:false}, emphasis:{scale:true,scaleSize:9},
+    data: CATS.map((c,i)=>({value:c.val,name:c.name,itemStyle:{color:COLS[i%5]}})) }] }, true);
+
+  const setHub = i => { const c=CATS[i]; dLabel.textContent=c.name; dVal.textContent=fmt(c.val); dPct.textContent=Math.round((c.val/tot)*100)+'% of Spend';
+    document.querySelectorAll('.cat-pill').forEach((el,idx)=>el.classList.toggle('active',idx===i)); };
+  window.__setHub = setHub;
+  const resetHub = () => { dLabel.textContent='Total Spent'; dVal.textContent=fmt(tot); dPct.textContent=cur+' · 100%';
+    document.querySelectorAll('.cat-pill').forEach(el=>el.classList.remove('active')); };
+  ec2.off('mouseover'); ec2.off('mouseout');
+  ec2.on('mouseover', p => setHub(p.dataIndex)); ec2.on('mouseout', resetHub);
+
+  catList.innerHTML = CATS.map((c,i)=>`<div class="cat-pill well-3d px-3 py-2 flex items-center justify-between text-xs"
+      onmouseenter="ec2.dispatchAction({type:'highlight',seriesIndex:0,dataIndex:${i}});__setHub(${i})"
+      onmouseleave="ec2.dispatchAction({type:'downplay',seriesIndex:0,dataIndex:${i}})">
+    <span class="flex items-center gap-2 truncate"><i class="w-2.5 h-2.5 rounded-full shrink-0" style="background:${COLS[i]}"></i><span class="truncate font-semibold">${c.name}</span></span>
+    <b class="num ml-2">${Math.round((c.val/tot)*100)}%</b></div>`).join('');
+
+  const d = DB[cur], score = Math.min(98, 58 + Math.round(((d.inc-d.exp)/d.inc)*80));
+  ec3.setOption({ series:[{type:'gauge',startAngle:210,endAngle:-30,min:0,max:100,
+    progress:{show:true,width:14,roundCap:true,itemStyle:{color:COLS[0]}},
+    axisLine:{roundCap:true,lineStyle:{width:14,color:[[1,split]]}},pointer:{show:false},axisTick:{show:false},splitLine:{show:false},axisLabel:{show:false},
+    detail:{valueAnimation:true,offsetCenter:[0,'4%'],fontSize:30,fontWeight:700,fontFamily:'Space Grotesk',color:dark?'#f8fafc':'#0f172a',formatter:'{value}\n{a|EXCELLENT}',rich:{a:{fontSize:10,color:'#10b981',fontFamily:'JetBrains Mono',padding:[6,0,0,0]}}},
+    data:[{value:score}]}] });
+}
+
+function setActiveMonth(m) {
+  document.querySelectorAll('.mBtn').forEach(x => x.className = 'mBtn px-3 py-1.5 rounded-lg text-xs font-bold ' + (x.textContent===m?'btn-3d':'opacity-75'));
+  renderUI(m);
+}
+Object.keys(DB).forEach(m => {
+  const b = document.createElement('button'); b.textContent = m;
+  b.className = 'mBtn px-3 py-1.5 rounded-lg text-xs font-bold ' + (m==='Oct'?'btn-3d':'opacity-75');
+  b.onclick = () => setActiveMonth(m); monthTabs.appendChild(b);
+});
+
+modeSpline.onclick = () => { cashType='line'; modeSpline.classList.add('btn-3d'); modeBar.classList.remove('btn-3d'); drawCharts(); };
+modeBar.onclick    = () => { cashType='bar';  modeBar.classList.add('btn-3d'); modeSpline.classList.remove('btn-3d'); drawCharts(); };
+modeDonut.onclick  = () => { roseMode=false;  modeDonut.classList.add('btn-3d'); modeRose.classList.remove('btn-3d'); drawCharts(); };
+modeRose.onclick   = () => { roseMode=true;   modeRose.classList.add('btn-3d'); modeDonut.classList.remove('btn-3d'); drawCharts(); };
+
+themeBtn.onclick = () => {
+  const h = document.documentElement, nxt = h.dataset.theme==='dark'?'light':'dark'; h.dataset.theme = nxt;
+  tIcon.textContent = nxt==='dark'?'☀️':'🌙'; tText.textContent = nxt==='dark'?'Light':'Dark'; drawCharts();
+};
+document.querySelectorAll('.nav-btn').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active')); b.classList.add('active');
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active')); document.getElementById('tab-'+b.dataset.tab).classList.add('active');
+  setTimeout(()=>{ec1&&ec1.resize();ec2&&ec2.resize();ec3&&ec3.resize();}, 50);
+});
+
+openModal.onclick = () => modal.classList.replace('hidden','grid'); closeModal.onclick = () => modal.classList.replace('grid','hidden');
+addForm.onsubmit = e => { e.preventDefault(); const k=fType.value, a=+fAmt.value; if(k==='in')DB[cur].inc+=a; else if(k==='out')DB[cur].exp+=a; else DB[cur].trf+=a; TX.unshift({t:fTitle.value,a,k}); renderUI(cur); e.target.reset(); modal.classList.replace('grid','hidden'); };
+
+aiBtn.onclick = () => { aiBox.classList.toggle('hidden'); aiBox.classList.toggle('flex'); }; closeAi.onclick = () => { aiBox.classList.add('hidden'); aiBox.classList.remove('flex'); };
+function askAI(q) {
+  aiMsgs.innerHTML += `<div class="btn-3d p-2.5 rounded-xl ml-8">${q}</div>`; const d = DB[cur], s = q.toLowerCase();
+  let r = `${cur}: Income <b>${fmt(d.inc)}</b>, Expenses <b>${fmt(d.exp)}</b>, Net Savings <b>${fmt(d.inc-d.exp)}</b>.`;
+  if (s.includes('kahan')) r = `Top spend: <b>Rent (₹8,000)</b>, <b>Food (₹5,200)</b>, <b>Bills (₹3,300)</b>.`;
+  if (s.includes('10,000')) r = `Savings is <b>${fmt(d.inc-d.exp)}</b>, but ₹27,398 bills are due. Hold ₹10k purchase till Rent is cleared.`;
+  if (s.includes('self')) r = `<b>${fmt(d.trf)}</b> in self-transfers excluded so spending stays 100% accurate.`;
+  setTimeout(() => { aiMsgs.innerHTML += `<div class="well-3d p-2.5 rounded-xl mr-6">${r}</div>`; aiMsgs.scrollTop = 9999; }, 250);
+}
+aiForm.onsubmit = e => { e.preventDefault(); if(aiInp.value.trim()){ askAI(aiInp.value); aiInp.value=''; } };
+document.querySelectorAll('.qChip').forEach(c => c.onclick = () => askAI(c.textContent));
+window.addEventListener('resize', () => { ec1&&ec1.resize(); ec2&&ec2.resize(); ec3&&ec3.resize(); });
+
+renderUI('Oct');
 </script>
 </body>
 </html>
